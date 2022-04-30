@@ -44,4 +44,10 @@ class DollarsSpec extends AnyFlatSpec{
       (fiveDollars - twoDollars).toString
     }
   }
+
+  it should "throw an exception when an invalid integer is provided to create Dollars" in {
+    assertThrows[ArithmeticException]{
+      Dollars(10 / 0)
+    }
+  }
 }
