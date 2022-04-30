@@ -12,4 +12,10 @@ class EmailSpec extends AnyFlatSpec{
     assert(email.localPart === "me")
     assert(email.domain === "google.com")
   }
+
+  it should "return another Email objet for another valid String" in {
+    assertResult("not-me") {
+      Email("not-me@google.com").localPart
+    }
+  }
 }

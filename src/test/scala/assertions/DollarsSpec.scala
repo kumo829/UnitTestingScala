@@ -26,4 +26,22 @@ class DollarsSpec extends AnyFlatSpec{
 
     assert(twoDollars < fiveDollars)
   }
+
+  it should "correctly add two Dollars amount" in {
+    val twoDollars = Dollars(2)
+    val fiveDollars = Dollars(5)
+
+    assertResult("$7"){
+      (fiveDollars + twoDollars).toString
+    }
+  }
+
+  it should "correctly subtract two Dollars amount" in {
+    val twoDollars = Dollars(2)
+    val fiveDollars = Dollars(5)
+
+    assertResult("$3"){
+      (fiveDollars - twoDollars).toString
+    }
+  }
 }
