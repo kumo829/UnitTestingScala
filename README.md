@@ -1,34 +1,66 @@
 # Unit Testing in Scala
 This project uses `ScalaTest` to write all the unit tests in the course.
 
-## Prerequisites
-- You must have `git` installed
-- You must have [Java v13](https://jdk.java.net/13/) installed
-```text
-➜ java -version
-openjdk version "13" 2019-09-17
-OpenJDK Runtime Environment AdoptOpenJDK (build 13+33)
-OpenJDK 64-Bit Server VM AdoptOpenJDK (build 13+33, mixed mode, sharing)
-```
-- You must have [sbt 1.3.3](https://github.com/hhimanshu/sbt-getting-started#how-to-install-sbt) or higher installed
-```text
-➜ sbt --version
-sbt version in this project: 1.3.3
-sbt script version: 1.3.3
-```
-- You must have [Scala 2.13.1](https://www.scala-lang.org/download/) installed
-```text
-➜ scala --version
-Scala code runner version 2.13.1 -- Copyright 2002-2019, LAMP/EPFL and Lightbend, Inc.
+
+## Test styles in ScalaTest
+
+There are 8 testing styles offered by ScalaTest
+
+1. `FlatSpec`. Teams wishing to move from xUnit to BDD style test. It is the recommended style when starting with ScalaTest for the first time. It is called **Flat** because the Specification Text and the Test are in a flat way (which makes it clean and easy to work with):
+
+```scala
+class HelloWorldSpec extends AnyFlatSpec{
+
+  behavior of "Hello World"
+
+  it should "start with Hello" in {
+    assert("Hello World".startsWith("Hello"))
+  }
+}
 ```
 
-## How to run?
-- Create a fork of this repo. Follow [Github](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) documentation on how to achieve this.
-- Clone your forked repo.
-```shell script
-git clone https://github.com/<your-user-name>/Unit-Testing-In-Scala
-cd Unit-Testing-In-Scala
+2. `FunSuite`. For teams coming from xUnit frameworks.
+```scala
+class HelloWorldFunSuiteSpec extends AnyFunSuite{
+
+  test("A string 'Hello World' should start with 'Hello'") {
+    assert("Hello World".startsWith("Hello"))
+  }
+}
 ```
+
+3. `FunSpec`. Teams coming from Ruby's RSpec.
+```scala
+class HelloWorldFunSpec extends AnyFunSpec{
+
+  describe("A 'Hello World' String"){
+    it ("should start with 'Hello'") {
+     assert("Hello World".startsWith("Hello"))
+    }
+  }
+}
+```
+
+4. `FeatureSpec`. Intended for acceptance testing.
+```scala
+class HelloWorldFeatureSpec extends AnyFeatureSpec with GivenWhenThen{
+
+  info("As a developer")
+  info("I want to test Strings")
+  
+  feature("A String") {
+      scenario("When a user provides 'Hello World' as input") {
+        Then("The input must start with 'Hello'")
+        assert("Hello World".startsWith("Hello"))
+      }
+  }
+}
+```
+
+5. `WordSpec`. Teams coming from spec or spec2 library. 
+6. `FreeSpec`. Teams experienced in BDD style.
+7. `PropSpec`. Teams wanting to perform Property-Based testing.
+
 
 ## Verify if the project is setup for the course
 ```shell script
@@ -51,6 +83,21 @@ scalac -classpath "*.jar" HelloWorldSpec.scala
 - Run the Test
 ```shell script
 scala -classpath "*.jar" org.scalatest.run HelloWorldSpec
+```
+
+- Run Using sbt
+```shell script
+sbt test 
+```
+
+- Run a single test using sbt
+```shell script
+sbt "testOnly HelloWorldSpec"
+```
+
+- Listen for changes in the test file (my personal favorite 😊)
+```shell script
+sbt "~testOnly *Hello*"
 ```
 
 ## Module 07 - Mocking and Tagging Your Tests
