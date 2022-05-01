@@ -15,6 +15,17 @@ class ContainerSpec extends UnitSpec {
     wallet should contain(oneUsd)
   }
 
+  it should "not contain a currency that is added to a List wallet" in {
+    val oneUsd: Currency = "1 USD"
+    val oneEur: Currency = "1 EUR"
+    val oneCad: Currency = "1 CAD"
+    val oneNzd: Currency = "1 NZD"
+
+    val wallet = List(oneUsd, oneEur, oneCad)
+
+    wallet should not contain oneNzd
+  }
+
   it should "contain a currency that is added to a Set wallet" in {
     val oneUsd: Currency = "1 USD"
     val oneEur: Currency = "1 EUR"

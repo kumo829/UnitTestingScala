@@ -40,4 +40,18 @@ class EqualitySpec extends UnitSpec {
 
     currency1 should be (currency2)
   }
+
+  it should "not match 10 CAD and 100 CAD currencies as equals when using 'should be' syntax " in {
+    val currency1: Currency = "10 CAD"
+    val currency2: Currency = "100 CAD"
+
+    currency1 should not be currency2
+  }
+
+  it should "not match 10 CAD and 100 CAD currencies as equals when using 'should equal' syntax " in {
+    val currency1: Currency = "10 CAD"
+    val currency2: Currency = "100 CAD"
+
+    currency1 should not equal currency2
+  }
 }

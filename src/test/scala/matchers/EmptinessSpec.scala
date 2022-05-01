@@ -26,4 +26,11 @@ class EmptinessSpec extends UnitSpec {
     wallet should be (empty)
 
   }
+
+  it should "not be empty when currencies are added to the wallet" in {
+    val wallet: List[Currency] = List("1 CAD")
+
+    wallet should not be empty
+
+  }
 }
