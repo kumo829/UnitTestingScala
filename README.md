@@ -61,6 +61,16 @@ class HelloWorldFeatureSpec extends AnyFeatureSpec with GivenWhenThen{
 6. `FreeSpec`. Teams experienced in BDD style.
 7. `PropSpec`. Teams wanting to perform Property-Based testing.
 
+## Run with tags
+```shell script
+testOnly -- -n com.h2.tags.Slow
+```
+
+```shell script
+testOnly -- -n com.h2.tags.Fast
+```
+
+
 
 ## Verify if the project is setup for the course
 ```shell script

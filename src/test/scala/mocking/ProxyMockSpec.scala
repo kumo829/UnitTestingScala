@@ -10,7 +10,7 @@ import java.util.UUID
 class ProxyMockSpec extends UnitSpec with MockFactory{
   behavior of "Account Service with Mocks"
 
-  it should "mock a Trait" in {
+  it should "mock a Trait" taggedAs Slow in {
     val mocked = mock[AccountService]
 
     val customerId = UUID.randomUUID()
@@ -21,7 +21,7 @@ class ProxyMockSpec extends UnitSpec with MockFactory{
     mocked.openDepositAccount(customerId, productId, tenDollars)
   }
 
-  it should "return mocked value" in {
+  it should "return mocked value" taggedAs Fast in {
     val mocked = mock[AccountService]
 
     val customerId = UUID.randomUUID()
